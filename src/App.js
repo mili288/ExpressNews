@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import Header from './components/Header';
+import Home from './pages/Home';
+import { NewsContextProvider } from './components/NewsContext';
+import { SportsContextProvider } from './components/SportsContext'
+import { EntContextProvider } from './components/EntContext';
+import { BussinessContextProvider } from './components/BussinessContext';
+import News from "./components/News";
+import Business from './pages/Business'
+import Sport from './pages/Sport'
+import Entertainment from './pages/Entertainment';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <EntContextProvider>
+    <BussinessContextProvider>
+    <SportsContextProvider>
+     <NewsContextProvider>
+     <Router>
+       <Header />
+       <Routes>
+         <Route path="/" element={<News />}/>
+         <Route path="/" element={<Home/>}/>
+         <Route path="/business" element={<Business/>}/>
+         <Route path="/sport" element={<Sport/>}/>
+         <Route path="/entertainment" element={<Entertainment/>}/>
+       </Routes>
+     </Router>
+     </NewsContextProvider>
+     </SportsContextProvider>
+     </BussinessContextProvider>
+     </EntContextProvider>
+    </>
   );
 }
 
